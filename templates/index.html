@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Management System</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f4f6f8;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-box {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #e8e8e8;
+        }
+
+        .delete {
+            color: red;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<h1>Student Management System</h1>
+
+
+<div class="form-box">
+
+<h2>Add Student</h2>
+
+<form action="/add" method="POST">
+
+    <input
+        type="number"
+        name="appid"
+        placeholder="AppID"
+        required
+    >
+
+    <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        required
+    >
+
+    <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+    >
+
+    <input
+        type="text"
+        name="course"
+        placeholder="Course"
+        required
+    >
+
+    <input
+        type="text"
+        name="contact"
+        placeholder="Contact Number"
+        required
+    >
+
+    <button type="submit">
+        Add Student
+    </button>
+
+</form>
+
+</div>
+
+
+<h2>Student Records</h2>
+
+
+<table>
+
+<tr>
+
+    <th>AppID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Course</th>
+    <th>Contact</th>
+    <th>Actions</th>
+
+</tr>
+
+
+{% for student in students %}
+
+<tr>
+
+<td>{{ student[0] }}</td>
+
+<td>{{ student[1] }}</td>
+
+<td>{{ student[2] }}</td>
+
+<td>{{ student[3] }}</td>
+
+<td>{{ student[4] }}</td>
+
+
+<td>
+
+<form
+    action="/edit/{{ student[0] }}"
+    method="POST"
+>
+
+    <input
+        type="text"
+        name="name"
+        value="{{ student[1] }}"
+    >
+
+    <input
+        type="email"
+        name="email"
+        value="{{ student[2] }}"
+    >
+
+    <input
+        type="text"
+        name="course"
+        value="{{ student[3] }}"
+    >
+
+    <input
+        type="text"
+        name="contact"
+        value="{{ student[4] }}"
+    >
+
+    <button type="submit">
+        Edit
+    </button>
+
+</form>
+
+
+<a
+    class="delete"
+    href="/delete/{{ student[0] }}"
+>
+    Delete
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>
